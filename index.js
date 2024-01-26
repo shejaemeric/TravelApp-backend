@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const cors = require("cors");
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.use(express.json());
 app.use(cors());
@@ -49,13 +49,11 @@ app.post("/api/register", async (req, res) => {
 
     const savedUser = await newUser.save();
 
-    res
-      .status(201)
-      .json({
-        message: "Registration successful",
-        userId: savedUser._id,
-        user: savedUser,
-      });
+    res.status(201).json({
+      message: "Registration successful",
+      userId: savedUser._id,
+      user: savedUser,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -98,7 +96,6 @@ app.get("/api/users/:id", async (req, res) => {
   }
 });
 
-// Authentication Endpoint - Login
 app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;
