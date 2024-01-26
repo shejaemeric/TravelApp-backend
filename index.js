@@ -51,7 +51,11 @@ app.post("/api/register", async (req, res) => {
 
     res
       .status(201)
-      .json({ message: "Registration successful", userId: savedUser._id });
+      .json({
+        message: "Registration successful",
+        userId: savedUser._id,
+        user: savedUser,
+      });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -118,7 +122,7 @@ app.post("/api/login", async (req, res) => {
       expiresIn: "1h",
     });
 
-    res.status(200).json({ token, userId: user._id });
+    res.status(200).json({ token, userId: user._id, user: user });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
